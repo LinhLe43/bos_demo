@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ApiFormatData, StudentStage } from "./type";
+import { StudentStage } from "./type";
 import { StudentItem } from "../../../../../types/StudentItem";
 import { useInjectReducer, useInjectSaga } from "redux-injectors";
 import { studentSaga } from "./saga";
+import { Pageable } from "../../../../../types/Pageable";
 
 export const initialState: StudentStage = {
   studentItem: undefined,
@@ -21,10 +22,7 @@ const slice = createSlice({
         return { payload: params, meta };
       },
     },
-    getStudentSuccess(
-      state,
-      action: PayloadAction<ApiFormatData<StudentItem>>
-    ) {
+    getStudentSuccess(state, action: PayloadAction<Pageable<StudentItem>>) {
       console.log("action.payload: ", action.payload);
 
       state.studentItem = action.payload;
